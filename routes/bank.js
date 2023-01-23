@@ -6,13 +6,14 @@ const {
         createBankController, 
         deleteBankController
 } = require("../controllers/banks");
+const isAuth = require('../middlewares/is-auth');
 const BankModel = require('../models/bank');
 
 const router = express.Router();
 
-router.get('/banks/:id?', listBanksController);
+router.get('/banks/:id?', isAuth, listBanksController);
 //create bank = post method
-router.post('/bank', [ 
+router.post('/banks',isAuth, [ 
         body('name').trim().not().isEmpty().withMessage("Name cannot be empty"),
         body("location").trim().not().isEmpty().withMessage("Location cannot be empty"),
         body("branch").trim().not().isEmpty().withMessage("Branch cannot be empty"),
@@ -27,8 +28,8 @@ router.post('/bank', [
         })
 ],createBankController);
 //update bank = put method
-router.put('/bank', updateBankController);
+router.put('/bank',isAuth, updateBankController);
 // //delete bank = delete method
-router.put('/bank', deleteBankController);
+router.put('/bank',isAuth, deleteBankController);
 
 module.exports = router;

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const accountRoutes = require('./routes/account');
 const bankRoutes = require("./routes/bank");
-const account = require('./models/account');
+const userRoutes = require('./routes/user');
 
 
 //create express server instance  
@@ -16,6 +16,7 @@ server.use(bodyParser.json());
 //routes
 server.use(accountRoutes);
 server.use(bankRoutes);
+server.use(userRoutes);
 
 
 // connect to databse start server
